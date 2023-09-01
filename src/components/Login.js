@@ -20,6 +20,7 @@ import Home from "./Home";
 
 import { provider } from "../utils/firebase";
 import { signInWithPopup } from "firebase/auth";
+import Themes from "./Themes";
 
 const Login = () => {
   const [signForm, setSignForm] = useState(true);
@@ -28,6 +29,7 @@ const Login = () => {
   const password = useRef(null);
   const navigate = useNavigate();
   const [value, setValue] = useState("");
+
 
   const click = () => {
     signInWithPopup(auth, provider).then((data) => {
@@ -44,6 +46,7 @@ const Login = () => {
     setErrorMsg(msg);
     if (msg) return;
     if (!signForm) {
+      //sign-up
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -60,6 +63,7 @@ const Login = () => {
           setErrorMsg(errorCode + "--" + errorMessage);
         });
     } else {
+      //
       signInWithEmailAndPassword(
         auth,
         email.current.value,
@@ -83,28 +87,31 @@ const Login = () => {
     setSignForm(!signForm);
   };
 
+
   return (
+ <>
+     <Button>{<Themes/>}</Button>
     <Container maxW="md" centerContent mt={10}>
       <Box p={8} boxShadow="md" rounded="lg" bg="white">
-        <Text fontSize="2xl" fontWeight="bold" mb={4}>
+        <Text fontSize="2xl" fontWeight="bold" mb={4} color="blue">
           {signForm ? "Sign In" : "Sign Up"}
         </Text>
         <Divider my={4} />
 
         {!signForm && (
           <FormControl>
-            <FormLabel>Full Name</FormLabel>
-            <Input type="text" placeholder="Full Name" />
+            <FormLabel color="blue">Full Name</FormLabel>
+            <Input type="text" placeholder="Full Name"/>
           </FormControl>
         )}
 
         <FormControl mt={4}>
-          <FormLabel>Email Address</FormLabel>
+          <FormLabel color="blue">Email Address</FormLabel>
           <Input ref={email} type="email" placeholder="Email Address" />
         </FormControl>
 
         <FormControl mt={4}>
-          <FormLabel>Password</FormLabel>
+          <FormLabel color="blue">Password</FormLabel>
           <Input ref={password} type="password" placeholder="Password" />
         </FormControl>
 
@@ -139,6 +146,7 @@ const Login = () => {
         </Text>
       </Box>
     </Container>
+  </>
   );
 };
 

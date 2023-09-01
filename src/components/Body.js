@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Login from './Login'
 import Home from "./Home";
 import {RouterProvider, createBrowserRouter} from "react-router-dom"
